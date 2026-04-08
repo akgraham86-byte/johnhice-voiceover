@@ -3,38 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Voiceover Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #0056b3, #00aaff);
+            color: white;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .testimonial-carousel {
+            overflow: hidden;
+            position: relative;
+        }
+        /* Add more styles here */
+    </style>
+    <script>
+        // JavaScript for filtering samples
+        function filterSamples(category) {
+            const samples = document.querySelectorAll('.sample');
+            samples.forEach(sample => {
+                if (sample.dataset.category === category || category === 'all') {
+                    sample.style.display = 'block';
+                } else {
+                    sample.style.display = 'none';
+                }
+            });
+        }
+        // JavaScript for testimonial carousel
+        let currentIndex = 0;
+        function showTestimonials() {
+            const testimonials = document.querySelectorAll('.testimonial');
+            testimonials.forEach((testimonial, index) => {
+                testimonial.style.display = index === currentIndex ? 'block' : 'none';
+            });
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            setTimeout(showTestimonials, 3000);
+        }
+        // Mailto form handling and quote calculation can be further added here
+    </script>
 </head>
-<body>
+<body onload="showTestimonials()">
     <header>
-        <h1>John Hice's Portfolio</h1>
         <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <a href="#samples">Samples</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Welcome to my portfolio! I'm John Hice, a dedicated voiceover artist with a passion for storytelling.</p>
+    <section class="hero">
+        <h1>Welcome to My Voiceover Portfolio</h1>
+        <img src="profile-placeholder.jpg" alt="Profile" />
     </section>
-    <section id="projects">
-        <h2>My Projects</h2>
-        <ul>
-            <li>Project 1 - Voiceover for a commercial</li>
-            <li>Project 2 - Audio narration for a series of e-learning modules</li>
-            <li>Project 3 - Character voice for an animated short</li>
-        </ul>
+    <section id="samples" class="grid">
+        <h2>Voiceover Samples</h2>
+        <button onclick="filterSamples('all')">Show All</button>
+        <button onclick="filterSamples('narration')">Narration</button>
+        <button onclick="filterSamples('character')">Character</button>
+        <div class="sample" data-category="narration">
+            <audio controls>
+                <source src="narration_calm.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div class="sample" data-category="character">
+            <audio controls>
+                <source src="character_transformers.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div class="sample" data-category="character">
+            <audio controls>
+                <source src="character_king_of_the_hill.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div class="sample" data-category="character">
+            <audio controls>
+                <source src="character_king_of_the_hill_2.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div class="sample" data-category="character">
+            <audio controls>
+                <source src="impressions_variety.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div class="sample" data-category="commercial">
+            <audio controls>
+                <source src="commercial_tasty_morsels.wav" type="audio/wav">
+            </audio>
+        </div>
+    </section>
+    <section id="demo-reel">
+        <h2>Demo Reel</h2>
+        <video controls>
+            <source src="demo_reel.mp4" type="video/mp4">
+        </video>
+    </section>
+    <section id="testimonials">
+        <h2>What People Say</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial">"Excellent work!" - Client A</div>
+            <div class="testimonial">"Very professional!" - Client B</div>
+            <div class="testimonial">"Loved the outcome!" - Client C</div>
+        </div>
     </section>
     <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: john@example.com</p>
+        <h2>Contact & Booking</h2>
+        <form action="mailto:example@example.com" method="post" enctype="text/plain">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message"></textarea><br>
+            <input type="submit" value="Send">
+        </form>
+        <h3>Pricing Calculator</h3>
+        <p>Calculate your quote based on rush pricing!</p>
     </section>
-    <footer>
-        <p>&copy; 2026 John Hice</p>
-    </footer>
 </body>
 </html>
